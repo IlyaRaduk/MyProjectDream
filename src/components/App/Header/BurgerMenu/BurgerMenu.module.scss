@@ -1,0 +1,12 @@
+.menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50px;
+
+  .menu__el {
+    height: 5px;
+    width: 5px;
+    background-color: red;
+  }
+}

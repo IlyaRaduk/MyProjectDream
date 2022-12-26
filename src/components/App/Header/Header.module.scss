@@ -1,0 +1,17 @@
+.header {
+  background-color: blue;
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .title {
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: center;
+  }
+
+  .menu {
+    margin-right: 25px;
+  }
+}
