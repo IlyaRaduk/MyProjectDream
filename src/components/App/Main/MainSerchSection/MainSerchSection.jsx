@@ -1,10 +1,10 @@
 import style from './MainSerchSection.module.scss';
-import DateField from './DateField/DateField';
+import DateFieldCont from './DateField/DateFieldCont';
 
 const MainSerchSection = (props) => {
     return (
         <section className={style.serch}>
-            <DateField />
+            <DateFieldCont />
         </section>
     )
 }
