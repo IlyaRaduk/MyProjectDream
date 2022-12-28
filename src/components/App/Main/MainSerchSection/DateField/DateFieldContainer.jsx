@@ -38,6 +38,7 @@ const getMoonPhase = () => {
     return moonPhase;
 }
 const getDate = () => {
+    console.log('')
     const optionsForDate = {
         year: 'numeric',
         month: 'long',
@@ -55,7 +56,7 @@ const DateFieldContainer = (props) => {
         console.log('useEffect');
         props.setDate(getDate());
         props.setMoonPhase(getMoonPhase());
-    }, [props.date, props.moonPhase])
+    }, [])
 
     return (
         <DateField date={props.date} moonPhase={props.moonPhase} />
