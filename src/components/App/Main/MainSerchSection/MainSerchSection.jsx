@@ -1,5 +1,5 @@
 import style from './MainSerchSection.module.scss';
-import DateFieldCont from './DateField/DateFieldCont';
+import DateFieldCont from './DateField/DateFieldContainer';
 
 const MainSerchSection = (props) => {
     return (
