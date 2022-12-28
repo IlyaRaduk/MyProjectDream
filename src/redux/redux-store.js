@@ -3,7 +3,7 @@ import ThunkMiddleware from "redux-thunk";
 import mainPageReducer from "./mainPageReducer";
 
 let reducers = combineReducers({
-    mainPage: mainPageReducer,
+    homePage: mainPageReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -1,9 +1,14 @@
 const SET_DATE = 'mainPageReducer/SET_DATE';
 const SET_MOON_PHASE = 'mainPageReducer/SET_MOON_PHASE';
+const SET_KEY_WORD = 'mainPageReducer/SET_KEY_WORD';
+const TOGGLE_IS_ALPHABET = 'mainPageReducer/TOGGLE_IS_ALPHABET';
+
 
 let initialState = {
   date: '',
   moonPhase: null,
+  keyWordInSerch: null,
+  isAlphabet: false,
 }
 
 const mainPageReducer = (state = initialState, action) => {
@@ -17,6 +22,16 @@ const mainPageReducer = (state = initialState, action) => {
       return {
         ...state,
         moonPhase: action.moonPhase,
+      }
+    case SET_KEY_WORD:
+      return {
+        ...state,
+        keyWordInSerch: action.keyWordInSerch,
+      }
+    case TOGGLE_IS_ALPHABET:
+      return {
+        ...state,
+        isAlphabet: !state.isAlphabet,
       }
     default:
       return state;
@@ -35,5 +50,16 @@ export const setMoonPhaseActionCreator = (moonPhase) => {
   return {
     type: SET_MOON_PHASE,
     moonPhase: moonPhase,
+  }
+}
+export const setKeyWordActionCreator = (keyWordInSerch) => {
+  return {
+    type: SET_KEY_WORD,
+    keyWordInSerch: keyWordInSerch,
+  }
+}
+export const toggleIsAlphabetActionCreator = () => {
+  return {
+    type: TOGGLE_IS_ALPHABET,
   }
 }
