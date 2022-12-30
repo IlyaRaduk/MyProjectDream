@@ -1,7 +1,10 @@
+import { getWordProfile } from "../api/api";
+
 const SET_DATE = 'mainPageReducer/SET_DATE';
 const SET_MOON_PHASE = 'mainPageReducer/SET_MOON_PHASE';
 const SET_KEY_WORD = 'mainPageReducer/SET_KEY_WORD';
 const TOGGLE_IS_ALPHABET = 'mainPageReducer/TOGGLE_IS_ALPHABET';
+
 
 
 let initialState = {
@@ -61,5 +64,21 @@ export const setKeyWordActionCreator = (keyWordInSerch) => {
 export const toggleIsAlphabetActionCreator = () => {
   return {
     type: TOGGLE_IS_ALPHABET,
+  }
+}
+
+export const setKeyWordThunkCreator = (word) => async (dispatch) => {
+  try {
+    const wordProfile = await getWordProfile(word);
+    console.log(wordProfile);
+    if (!wordProfile) {
+      alert('такого слово нет!')
+    }
+    else {
+      dispatch(setKeyWordActionCreator(wordProfile.name))
+    }
+  }
+  catch (error) {
+    console.log(error);
   }
 }

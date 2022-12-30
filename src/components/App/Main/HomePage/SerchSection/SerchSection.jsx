@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import style from './SerchSection.module.scss';
-import { setKeyWordActionCreator, toggleIsAlphabetActionCreator } from '../../../../../redux/mainPageReducer';
+import { setKeyWordThunkCreator, toggleIsAlphabetActionCreator } from '../../../../../redux/mainPageReducer';
 import Alphabet from './Alphabet/Alphabet';
-
 
 const SerchSection = (props) => {
     const [inputText, setInputText] = useState('');
@@ -18,7 +17,7 @@ const SerchSection = (props) => {
 
     const handlerSubmitSerch = (e) => {
         e.preventDefault();
-        dispatch(setKeyWordActionCreator(inputText));
+        dispatch(setKeyWordThunkCreator(inputText));
     }
 
     const handlerSubmitAlphabet = (e) => {

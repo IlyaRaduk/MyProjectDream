@@ -2,6 +2,7 @@ import style from './Main.module.scss'
 import HomePage from './HomePage/HomePage';
 import { Route, Routes } from 'react-router-dom';
 import Words from './Words/Words';
+import WordProfile from './WordProfile/WordProfile';
 
 const Main = (props) => {
     return (
@@ -10,6 +11,7 @@ const Main = (props) => {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/words/:letter" element={<Words/>} />
+                    <Route path="/word/:word" element={<WordProfile/>} />
                 </Routes>
             </div>
         </main>
