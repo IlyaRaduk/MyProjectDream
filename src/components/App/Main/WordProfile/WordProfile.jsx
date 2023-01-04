@@ -10,7 +10,8 @@ const WordProfile = (props) => {
     const wordProfile = useSelector((state) => state.wordProfilePage.wordProfile);
     useEffect(() => {
         dispatch(getWordProfileThunkCreator(wordWithURL))
-    },[dispatch]);
+    }, [dispatch]);
+    
     return (
         <section>
             <div>{wordProfile?.name}</div>

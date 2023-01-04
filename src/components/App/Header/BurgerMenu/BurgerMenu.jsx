@@ -1,12 +1,32 @@
-import style from './../BurgerMenu/BurgerMenu.module.scss'
+import style from './../BurgerMenu/BurgerMenu.module.scss';
+import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleIsBurgerMenu } from '../../../../redux/headerReducer';
 
 const BurgerMenu = (props) => {
+    const isActiveBurgerMenu = useSelector((state) => state.header.isActiveBurgerMenu);
+    const dispatch = useDispatch();
+
+    const handlerBurgerMenu = (e) => {
+        dispatch(toggleIsBurgerMenu());
+    }
+
     return (
-        <div className={style.menu}>
-            <div className={style.menu__el}></div>
-            <div className={style.menu__el}></div>
-            <div className={style.menu__el}></div>
-        </div>
+        <>
+            <div onClick={(e) => handlerBurgerMenu(e)} className={isActiveBurgerMenu ? style.menuBurger_btn_Active : style.menuBurger_btn}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div className={isActiveBurgerMenu ? style.menuBurger_Active : style.menuBurger}>
+                <nav>
+                    <ul >
+                        <li><NavLink to={"/"}> На главную</NavLink ></li>
+                        <li><NavLink to={"/words/"}> Все слова</NavLink ></li>
+                    </ul>
+                </nav>
+            </div>
+        </>
     )
 }
 export default BurgerMenu;

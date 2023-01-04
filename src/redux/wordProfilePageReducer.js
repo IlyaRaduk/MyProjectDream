@@ -1,4 +1,4 @@
-import { getWordProfile } from "../api/api";
+import { getWords } from "../api/api";
 const SET_WORD_PROFILE = 'wordPageReducer/SET_WORD_PROFILE';
 
 let initialState = {
@@ -28,8 +28,8 @@ export const setWordProfileActionCreator = (wordProfile) => {
 
 export const getWordProfileThunkCreator = (word) => async (dispatch) => {
   try {
-    const wordProfile = await getWordProfile(word);
-    dispatch(setWordProfileActionCreator(wordProfile));
+    const wordProfile = await getWords(word);
+    dispatch(setWordProfileActionCreator(...wordProfile));
   }
   catch (error) {
     console.log(error);

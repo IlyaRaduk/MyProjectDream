@@ -1,12 +1,89 @@
-.menu {
+.menuBurger_btn {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 50px;
+  width: 70px;
+  height: 70px;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+}
 
-  .menu__el {
-    height: 5px;
-    width: 5px;
-    background-color: red;
-  }
+.menuBurger_btn span {
+  width: 50px;
+  height: 5px;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s;
+  background-color: #FF7400;
+}
+
+.menuBurger_btn span:nth-of-type(2) {
+  top: calc(50% - 12px);
+}
+
+.menuBurger_btn span:nth-of-type(3) {
+  top: calc(50% + 12px);
+}
+
+.menuBurger_btn span:nth-of-type(1) {
+  top: calc(50%);
+}
+
+.menuBurger_btn_Active {
+  display: flex;
+  width: 70px;
+  height: 70px;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.menuBurger_btn_Active span {
+  width: 50px;
+  height: 5px;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s;
+  background-color: #FF7400;
+}
+
+.menuBurger_btn_Active span:nth-of-type(1) {
+  display: none;
+}
+
+.menuBurger_btn_Active span:nth-of-type(2) {
+  top: 50%;
+  transform: rotate(45deg);
+}
+
+.menuBurger_btn_Active span:nth-of-type(3) {
+  top: 50%;
+  transform: rotate(-45deg);
+}
+
+.menuBurger {
+  transform: translateX(100%);
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 300px;
+  padding: 75px 45px 0 45px;
+  background: white;
+  transition: transform 0.3s;
+}
+
+nav li {
+  list-style-type: none;
+}
+
+.menuBurger_Active {
+  transform: translateX(0%);
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 300px;
+  padding: 75px 45px 0 45px;
+  background: white;
+  transition: transform 0.3s;
 }

@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { getWordsThunkCreator } from '../../../../redux/wordsPageReducer';
 import WordItem from './WordItem/WordItem';
 
-
 const Words = (props) => {
     const letterWithURL = useParams().letter;
     const dispatch = useDispatch();

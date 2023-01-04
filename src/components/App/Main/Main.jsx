@@ -11,7 +11,8 @@ const Main = (props) => {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/words/:letter" element={<Words/>} />
-                    <Route path="/word/:word" element={<WordProfile/>} />
+                    <Route path="/words" element={<Words/>} />
+                    <Route path="/wordProfile/:word" element={<WordProfile/>} />
                 </Routes>
             </div>
         </main>

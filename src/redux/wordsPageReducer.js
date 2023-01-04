@@ -41,10 +41,16 @@ export const setLetterActionCreator = (letter) => {
 
 export const getWordsThunkCreator = (letter) => async (dispatch) => {
   try {
-    dispatch(setLetterActionCreator(letter));
-    const words = await getWords(letter);
-    console.log(words)
-    dispatch(setWordsActionCreator(words));
+    if (!letter) {
+      dispatch(setLetterActionCreator('Все слова'));
+      const words = await getWords(null);
+      dispatch(setWordsActionCreator(words));
+    }
+    else {
+      dispatch(setLetterActionCreator(letter));
+      const words = await getWords(letter);
+      dispatch(setWordsActionCreator(words));
+    }
   }
   catch (error) {
     console.log(error);
