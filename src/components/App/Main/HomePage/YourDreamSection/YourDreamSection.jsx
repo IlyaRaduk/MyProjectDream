@@ -1,7 +1,10 @@
 import style from './YourDreamSection.module.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { sendDreamThunkCreator } from '../../../../../redux/mainPageReducer';
+import { useDispatch } from 'react-redux';
 
 const YourDreamSection = () => {
+    const dispatch = useDispatch();
     return (
         <div>
             <h2>Индивидуальная расшифровка Вашего сна</h2>
@@ -23,7 +26,7 @@ const YourDreamSection = () => {
                         return errors;
                     }}
                     onSubmit={(values, { setSubmitting }) => {
-                        alert('сон отправлен'+' email: '+ values.email+' text: '+ values.text)
+                        dispatch(sendDreamThunkCreator(values));
                         setSubmitting(false);
                     }}
                 >

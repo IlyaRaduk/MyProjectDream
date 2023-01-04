@@ -1,4 +1,4 @@
-import { getWords } from "../api/api";
+import { getWords, sendDream } from "../api/api";
 
 const SET_DATE = 'mainPageReducer/SET_DATE';
 const SET_MOON_PHASE = 'mainPageReducer/SET_MOON_PHASE';
@@ -73,6 +73,38 @@ export const setKeyWordThunkCreator = (word) => async (dispatch) => {
     }
     else {
       dispatch(setKeyWordActionCreator(word))
+    }
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export const sendDreamThunkCreator = (dream) => async (dispatch) => {
+  try {
+    console.log(dream)
+    const response = await sendDream(dream);
+    if (response) {
+      alert('Сон отправлен, ждите расшифровку на Ваш email');
+    }
+    else{
+      alert('Ошибка!');
+    }
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export const getPredictionThunkCreator = (dream) => async (dispatch) => {
+  try {
+    console.log(dream)
+    const response = await sendDream(dream);
+    if (response) {
+      alert('Сон отправлен, ждите расшифровку на Ваш email');
+    }
+    else{
+      alert('Ошибка!');
     }
   }
   catch (error) {
