@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
         await mongoClient.connect();
         app.locals.collectionWords = mongoClient.db("dream").collection("words");
         app.locals.collectionDreams = mongoClient.db("dream").collection("dreams");
+        app.locals.collectionPredictions = mongoClient.db("dream").collection("predictions");
         app.listen(port, () => {
             console.log(`Exampl e app listening on port ${port}`)
         })
@@ -33,6 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 //routes
 app.use('/words', require('./routes/words'));
 app.use('/dreams', require('./routes/dreams'));
+app.use('/predictions', require('./routes/predictions'));
 
 // прослушиваем прерывание работы программы (ctrl-c)
 process.on("SIGINT", async () => {

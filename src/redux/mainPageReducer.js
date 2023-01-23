@@ -1,15 +1,19 @@
-import { getWords, sendDream } from "../api/api";
+import { getWords, sendDream, getPrediction } from "../api/api";
 
 const SET_DATE = 'mainPageReducer/SET_DATE';
 const SET_MOON_PHASE = 'mainPageReducer/SET_MOON_PHASE';
 const SET_KEY_WORD = 'mainPageReducer/SET_KEY_WORD';
 const TOGGLE_IS_ALPHABET = 'mainPageReducer/TOGGLE_IS_ALPHABET';
+const IS_ACTIVE_PREDICTION = 'mainPageReducer/IS_ACTIVE_PREDICTION';
+const IS_UNACTIVE_PREDICTION = 'mainPageReducer/IS_UNACTIVE_PREDICTION';
 
 let initialState = {
   date: '',
   moonPhase: null,
   keyWordInSerch: null,
   isAlphabet: false,
+  isActivePrediction: false,
+  prediction: null,
 }
 
 const mainPageReducer = (state = initialState, action) => {
@@ -33,6 +37,18 @@ const mainPageReducer = (state = initialState, action) => {
       return {
         ...state,
         isAlphabet: !state.isAlphabet,
+      }
+    case IS_ACTIVE_PREDICTION:
+      return {
+        ...state,
+        isActivePrediction: true,
+        prediction: action.prediction,
+      }
+    case IS_UNACTIVE_PREDICTION:
+      return {
+        ...state,
+        isActivePrediction: false,
+        prediction: action.prediction,
       }
     default:
       return state;
@@ -64,6 +80,18 @@ export const toggleIsAlphabetActionCreator = () => {
     type: TOGGLE_IS_ALPHABET,
   }
 }
+export const ActivePredictionActionCreator = () => {
+  return {
+    type: IS_ACTIVE_PREDICTION,
+    prediction: null,
+  }
+}
+export const UnActivePredictionActionCreator = (prediction) => {
+  return {
+    type: IS_UNACTIVE_PREDICTION,
+    prediction: prediction,
+  }
+}
 
 export const setKeyWordThunkCreator = (word) => async (dispatch) => {
   try {
@@ -87,7 +115,7 @@ export const sendDreamThunkCreator = (dream) => async (dispatch) => {
     if (response) {
       alert('Сон отправлен, ждите расшифровку на Ваш email');
     }
-    else{
+    else {
       alert('Ошибка!');
     }
   }
@@ -96,18 +124,10 @@ export const sendDreamThunkCreator = (dream) => async (dispatch) => {
   }
 }
 
-export const getPredictionThunkCreator = (dream) => async (dispatch) => {
-  try {
-    console.log(dream)
-    const response = await sendDream(dream);
-    if (response) {
-      alert('Сон отправлен, ждите расшифровку на Ваш email');
-    }
-    else{
-      alert('Ошибка!');
-    }
-  }
-  catch (error) {
-    console.log(error);
-  }
+export const getPredictionThunkCreator = () => async (dispatch) => {
+  const prediction = await getPrediction();
+  dispatch(ActivePredictionActionCreator());
+  setTimeout(()=>{
+    dispatch(UnActivePredictionActionCreator(prediction))
+  },5000)
 }

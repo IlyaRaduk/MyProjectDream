@@ -1,6 +1,52 @@
-.cookie{
-    width: 200px;
-    height: 200px;
+.prediction {
+    position: relative;
+}
+
+.cookie {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     background-color: red;
+    animation: cookie 10s linear infinite;
+    position: absolute;
+    bottom: 0;
+}
+
+@keyframes cookie {
+    0% {
+        bottom: 0;
+    }
+    62% {
+        bottom: 0;
+    }
+    64% {
+        bottom: 20%;
+    }
+    66% {
+        bottom: 0%;
+    }
+}
+
+.cookieActive {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: red;
+    animation: cookieActive 1s linear infinite;
+    position: absolute;
+    bottom: 0;
+}
+
+@keyframes cookieActive {
+    0% {
+       transform: rotateY(360deg) ;
+    }
+
+    50% {
+        transform: rotateY(720deg) ;
+    }
+
+    100% {
+        transform: rotateY(1080deg) ;
+    }
 }

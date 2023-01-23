@@ -17,3 +17,8 @@ export const sendDream = async (dream) => {
     const response = await instance.post('dreams/', { email: dream.email, dream: dream.text });
     return (response.data);
 }
+
+export const getPrediction = async () => {
+    const response = await instance.get('predictions/');
+    return (response.data.prediction);
+}
