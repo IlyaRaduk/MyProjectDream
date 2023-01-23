@@ -1,7 +1,8 @@
+const db = require('./../DBpostgreSQL');
+
 const setDreams = async (request, response) => {
-    const collection = request.app.locals.collectionDreams;
     try {
-        await collection.insertOne({ email: request.body.email, dream: request.body.dream });
+        await db.query(`INSERT INTO dreams (email,dream) VALUES ('${request.body.email}','${request.body.dream}')`);
         response.sendStatus(200);
     }
     catch (err) {

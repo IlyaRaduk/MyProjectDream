@@ -1,6 +1,4 @@
 const express = require('express');
-const MongoClient = require("mongodb").MongoClient;
-const mongoClient = new MongoClient("mongodb://127.0.0.1:27017");
 const app = express();
 const port = 3005;
 
@@ -19,10 +17,6 @@ app.use(express.urlencoded({ extended: false }));
 //Подключение Монго и запуск сервера
 (async () => {
     try {
-        await mongoClient.connect();
-        app.locals.collectionWords = mongoClient.db("dream").collection("words");
-        app.locals.collectionDreams = mongoClient.db("dream").collection("dreams");
-        app.locals.collectionPredictions = mongoClient.db("dream").collection("predictions");
         app.listen(port, () => {
             console.log(`Exampl e app listening on port ${port}`)
         })

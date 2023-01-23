@@ -1,7 +1,9 @@
+const db = require('./../DBpostgreSQL');
+
 const getPrediction = async (request, response) => {
-    const collection = request.app.locals.collectionPredictions;
     try {
-        let predictions = await collection.find({}).toArray();
+        let predictions = await db.query('SELECT * FROM prediction');
+        predictions = predictions.rows;
         const predictionRandom = predictions[Math.floor(Math.random() * predictions.length)];
         response.send(predictionRandom);
     }

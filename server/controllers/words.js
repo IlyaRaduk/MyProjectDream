@@ -1,9 +1,9 @@
+const db = require('./../DBpostgreSQL');
 
 const getWordsFromLetter = async (request, response) => {
-    const collection = request.app.locals.collectionWords;
     try {
-        let words = await collection.find({}).toArray();
-
+        let words = await db.query('SELECT * FROM words');
+        words = words.rows;
         if (request.params.letter.length === 1) {
             words = words.filter((el) => { if (el.name[0] == request.params.letter) return true });
         }
@@ -18,9 +18,9 @@ const getWordsFromLetter = async (request, response) => {
 }
 
 const getAllWords = async (request, response) => {
-    const collection = request.app.locals.collectionWords;
     try {
-        let words = await collection.find({}).toArray();
+        let words = await db.query('SELECT * FROM words');
+        words = words.rows;
         response.send(words);
     }
     catch (err) {
