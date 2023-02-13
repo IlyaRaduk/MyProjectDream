@@ -10,8 +10,8 @@ const getMoonPhase = () => {
     const delayPhase = 318930372;
     let nowTime = Date.now()
     let moonDay = ((nowTime - moonBegin) % moonMonth);
-    console.log(moonDay);
-    console.log(delayPhase*8)
+    // console.log(moonDay);
+    // console.log(delayPhase*8)
     let moonPhase = null;
     if (0 <= moonDay && moonDay < 318930372) {
         moonPhase = 'Полнолуние';

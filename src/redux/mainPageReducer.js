@@ -3,14 +3,17 @@ import { getWords, sendDream, getPrediction } from "../api/api";
 const SET_DATE = 'mainPageReducer/SET_DATE';
 const SET_MOON_PHASE = 'mainPageReducer/SET_MOON_PHASE';
 const SET_KEY_WORD = 'mainPageReducer/SET_KEY_WORD';
+const SET_SUB_WORDS = 'mainPageReducer/SET_SUB_WORDS';
 const TOGGLE_IS_ALPHABET = 'mainPageReducer/TOGGLE_IS_ALPHABET';
 const IS_ACTIVE_PREDICTION = 'mainPageReducer/IS_ACTIVE_PREDICTION';
 const IS_UNACTIVE_PREDICTION = 'mainPageReducer/IS_UNACTIVE_PREDICTION';
+const SET_INIT = 'mainPageReducer/SET_INIT';
 
 let initialState = {
   date: '',
   moonPhase: null,
-  keyWordInSerch: null,
+  keyWordInSerch: '',
+  subWords: null,
   isAlphabet: false,
   isActivePrediction: false,
   prediction: null,
@@ -33,6 +36,11 @@ const mainPageReducer = (state = initialState, action) => {
         ...state,
         keyWordInSerch: action.keyWordInSerch,
       }
+    case SET_SUB_WORDS:
+      return {
+        ...state,
+        subWords: action.subWords,
+      }
     case TOGGLE_IS_ALPHABET:
       return {
         ...state,
@@ -50,6 +58,15 @@ const mainPageReducer = (state = initialState, action) => {
         isActivePrediction: false,
         prediction: action.prediction,
       }
+    case SET_INIT:
+      return {
+        ...state,
+        keyWordInSerch: '',
+        subWords: null,
+        isAlphabet: false,
+        isActivePrediction: false,
+        prediction: null,
+      }
     default:
       return state;
   }
@@ -57,6 +74,11 @@ const mainPageReducer = (state = initialState, action) => {
 
 export default mainPageReducer;
 
+export const setInitActionCreator = () => {
+  return {
+    type: SET_INIT,
+  }
+}
 export const setDateActionCreator = (date) => {
   return {
     type: SET_DATE,
@@ -75,6 +97,12 @@ export const setKeyWordActionCreator = (keyWordInSerch) => {
     keyWordInSerch: keyWordInSerch,
   }
 }
+export const setSubWordsActionCreator = (subWords) => {
+  return {
+    type: SET_SUB_WORDS,
+    subWords: subWords,
+  }
+}
 export const toggleIsAlphabetActionCreator = () => {
   return {
     type: TOGGLE_IS_ALPHABET,
@@ -86,6 +114,7 @@ export const ActivePredictionActionCreator = () => {
     prediction: null,
   }
 }
+
 export const UnActivePredictionActionCreator = (prediction) => {
   return {
     type: IS_UNACTIVE_PREDICTION,
@@ -95,12 +124,21 @@ export const UnActivePredictionActionCreator = (prediction) => {
 
 export const setKeyWordThunkCreator = (word) => async (dispatch) => {
   try {
-    const wordProfile = await getWords(word);
-    if (!wordProfile || wordProfile.length == 0) {
-      alert('такого слово нет!')
+    if (word === '') {
+      dispatch(setKeyWordActionCreator(''))
+      dispatch(setSubWordsActionCreator(null))
     }
     else {
-      dispatch(setKeyWordActionCreator(word))
+      const wordProfile = await getWords(word);
+      if (wordProfile.length == 0) {
+        dispatch(setKeyWordActionCreator(word))
+      }
+      else {
+        dispatch(setKeyWordActionCreator(word))
+        if (word.length > 2) {
+          dispatch(setSubWordsActionCreator(wordProfile))
+        }
+      }
     }
   }
   catch (error) {
@@ -127,7 +165,7 @@ export const sendDreamThunkCreator = (dream) => async (dispatch) => {
 export const getPredictionThunkCreator = () => async (dispatch) => {
   const prediction = await getPrediction();
   dispatch(ActivePredictionActionCreator());
-  setTimeout(()=>{
+  setTimeout(() => {
     dispatch(UnActivePredictionActionCreator(prediction))
-  },5000)
+  }, 5000)
 }

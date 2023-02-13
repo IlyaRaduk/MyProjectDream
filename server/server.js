@@ -14,7 +14,7 @@ app.use(express.json());
 //Для парсинга application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
 
-//Подключение Монго и запуск сервера
+// запуск сервера
 (async () => {
     try {
         app.listen(port, () => {

@@ -13,6 +13,7 @@ const Main = (props) => {
                     <Route path="/words/:letter" element={<Words/>} />
                     <Route path="/words" element={<Words/>} />
                     <Route path="/wordProfile/:word" element={<WordProfile/>} />
+                    {/* <Route path="*" element={<NotFoundPage/>} /> */}
                 </Routes>
             </div>
         </main>

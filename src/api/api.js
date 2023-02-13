@@ -9,6 +9,7 @@ export const getWords = async (letter) => {
         const response = await instance.get('words/');
         return (response.data);
     }
+    letter= letter[0].toUpperCase() + letter.slice(1);
     const response = await instance.get('words/' + letter);
     return (response.data);
 }

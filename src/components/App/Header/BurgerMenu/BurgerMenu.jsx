@@ -18,14 +18,18 @@ const BurgerMenu = (props) => {
                 <span></span>
                 <span></span>
             </div>
-            <div className={isActiveBurgerMenu ? style.menuBurger_Active : style.menuBurger}>
-                <nav>
-                    <ul >
-                        <li><NavLink to={"/"}> На главную</NavLink ></li>
-                        <li><NavLink to={"/words/"}> Все слова</NavLink ></li>
-                    </ul>
-                </nav>
+
+            <div onClick={(e)=>handlerBurgerMenu(e)} className={isActiveBurgerMenu ? style.menuBurgerField_Active : style.menuBurgerField}>
+                <div onClick={(e)=> e.stopPropagation()} className={style.menuBurger}>
+                    <nav>
+                        <ul >
+                            <li><NavLink to={"/"}> На главную</NavLink ></li>
+                            <li><NavLink to={"/words/"}> Все слова</NavLink ></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
+
         </>
     )
 }
