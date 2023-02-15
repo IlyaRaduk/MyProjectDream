@@ -1,10 +1,7 @@
-import { getWords, sendDream, getPrediction } from "../api/api";
+import { sendDream, getPrediction } from "../api/api";
 
 const SET_DATE = 'mainPageReducer/SET_DATE';
 const SET_MOON_PHASE = 'mainPageReducer/SET_MOON_PHASE';
-const SET_KEY_WORD = 'mainPageReducer/SET_KEY_WORD';
-const SET_SUB_WORDS = 'mainPageReducer/SET_SUB_WORDS';
-const TOGGLE_IS_ALPHABET = 'mainPageReducer/TOGGLE_IS_ALPHABET';
 const IS_ACTIVE_PREDICTION = 'mainPageReducer/IS_ACTIVE_PREDICTION';
 const IS_UNACTIVE_PREDICTION = 'mainPageReducer/IS_UNACTIVE_PREDICTION';
 const SET_INIT = 'mainPageReducer/SET_INIT';
@@ -12,9 +9,6 @@ const SET_INIT = 'mainPageReducer/SET_INIT';
 let initialState = {
   date: '',
   moonPhase: null,
-  keyWordInSerch: '',
-  subWords: null,
-  isAlphabet: false,
   isActivePrediction: false,
   prediction: null,
 }
@@ -31,21 +25,6 @@ const mainPageReducer = (state = initialState, action) => {
         ...state,
         moonPhase: action.moonPhase,
       }
-    case SET_KEY_WORD:
-      return {
-        ...state,
-        keyWordInSerch: action.keyWordInSerch,
-      }
-    case SET_SUB_WORDS:
-      return {
-        ...state,
-        subWords: action.subWords,
-      }
-    case TOGGLE_IS_ALPHABET:
-      return {
-        ...state,
-        isAlphabet: !state.isAlphabet,
-      }
     case IS_ACTIVE_PREDICTION:
       return {
         ...state,
@@ -61,9 +40,6 @@ const mainPageReducer = (state = initialState, action) => {
     case SET_INIT:
       return {
         ...state,
-        keyWordInSerch: '',
-        subWords: null,
-        isAlphabet: false,
         isActivePrediction: false,
         prediction: null,
       }
@@ -91,23 +67,6 @@ export const setMoonPhaseActionCreator = (moonPhase) => {
     moonPhase: moonPhase,
   }
 }
-export const setKeyWordActionCreator = (keyWordInSerch) => {
-  return {
-    type: SET_KEY_WORD,
-    keyWordInSerch: keyWordInSerch,
-  }
-}
-export const setSubWordsActionCreator = (subWords) => {
-  return {
-    type: SET_SUB_WORDS,
-    subWords: subWords,
-  }
-}
-export const toggleIsAlphabetActionCreator = () => {
-  return {
-    type: TOGGLE_IS_ALPHABET,
-  }
-}
 export const ActivePredictionActionCreator = () => {
   return {
     type: IS_ACTIVE_PREDICTION,
@@ -119,31 +78,6 @@ export const UnActivePredictionActionCreator = (prediction) => {
   return {
     type: IS_UNACTIVE_PREDICTION,
     prediction: prediction,
-  }
-}
-
-export const setKeyWordThunkCreator = (word) => async (dispatch) => {
-  try {
-    if (word === '') {
-      dispatch(setKeyWordActionCreator(''))
-      dispatch(setSubWordsActionCreator(null))
-    }
-    else {
-      const response = await getWords(word);
-      const wordProfile = response.data;
-      if (wordProfile.length == 0) {
-        dispatch(setKeyWordActionCreator(word))
-      }
-      else {
-        dispatch(setKeyWordActionCreator(word))
-        if (word.length > 2) {
-          dispatch(setSubWordsActionCreator(wordProfile))
-        }
-      }
-    }
-  }
-  catch (error) {
-    console.log(error);
   }
 }
 

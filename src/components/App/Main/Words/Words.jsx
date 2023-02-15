@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getWordsThunkCreator, setIsFetchingActionCreator, resetInitActionCreator } from '../../../../redux/wordsPageReducer';
 import WordItem from './WordItem/WordItem';
+import SerchSection from '../../../common/SerchSection/SerchSection';
 
 const Words = (props) => {
     const letterFromURL = useParams().letter;
@@ -41,6 +42,7 @@ const Words = (props) => {
     return (
         <section>
             {letter}
+            <SerchSection/>
             <WordItem words={words} />
         </section>
     )

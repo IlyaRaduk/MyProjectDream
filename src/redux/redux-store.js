@@ -4,12 +4,14 @@ import mainPageReducer from "./mainPageReducer";
 import wordsPageReducer from "./wordsPageReducer";
 import wordProfilePageReducer from "./wordProfilePageReducer";
 import headerReducer from "./headerReducer";
+import searchReducer from "./searchReducer";
 
 let reducers = combineReducers({
     homePage: mainPageReducer,
     wordsPage: wordsPageReducer,
     wordProfilePage: wordProfilePageReducer,
     header: headerReducer,
+    search: searchReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

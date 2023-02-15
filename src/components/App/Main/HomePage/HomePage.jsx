@@ -1,6 +1,6 @@
 import style from './HomePage.module.scss';
 import DateFieldContainer from './DateField/DateFieldContainer';
-import SerchSection from './SerchSection/SerchSection';
+import SerchSection from './../../../common/SerchSection/SerchSection';
 import YourDreamSection from './YourDreamSection/YourDreamSection';
 import Prediction from './Prediction/Prediction';
 import { useEffect } from 'react';
