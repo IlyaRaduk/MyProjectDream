@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { getAllWords, getWordsFromLetter } = require('../controllers/words')
+const { getWords } = require('../controllers/words')
 
-router.get('/', getAllWords);
-
-router.get('/:letter', getWordsFromLetter);
+router.get('/', getWords);
 
 module.exports = router;

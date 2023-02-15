@@ -129,7 +129,8 @@ export const setKeyWordThunkCreator = (word) => async (dispatch) => {
       dispatch(setSubWordsActionCreator(null))
     }
     else {
-      const wordProfile = await getWords(word);
+      const response = await getWords(word);
+      const wordProfile = response.data;
       if (wordProfile.length == 0) {
         dispatch(setKeyWordActionCreator(word))
       }

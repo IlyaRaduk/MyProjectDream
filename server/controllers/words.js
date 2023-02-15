@@ -1,35 +1,29 @@
 const db = require('./../DBpostgreSQL');
 
-const getWordsFromLetter = async (request, response) => {
+const getWords = async (request, response) => {
     try {
-        let words = await db.query('SELECT * FROM words');
-        words = words.rows;
-        if (request.params.letter.length === 1) {
-            words = words.filter((el) => { if (el.name[0] == request.params.letter) return true });
+        let curPage = request.query.page - 1;
+        let words;
+        let totalCount;
+        if (request.query.letter) {
+            words = await db.query(`SELECT * FROM words WHERE name LIKE \'${request.query.letter}%\' ORDER BY name LIMIT 50 OFFSET ${curPage * 50}`);
+            totalCount = await db.query(`SELECT COUNT(*) FROM words WHERE name like \'${request.query.letter}%\' `);
         }
         else {
-            words = words.filter((el) => { if (el.name.startsWith(request.params.letter)) return true });
+            words = await db.query(`SELECT * FROM words ORDER BY name LIMIT 50 OFFSET ${curPage * 50}`);
+            totalCount = await db.query(`SELECT COUNT(*) FROM words `);
         }
-        response.send(words);
-    }
-    catch (err) {
-        response.sendStatus(500);
-    }
-}
-
-const getAllWords = async (request, response) => {
-    try {
-        let words = await db.query('SELECT * FROM words');
+        response.set('x-total-count', totalCount.rows[0].count);
+        response.set('Access-Control-Expose-Headers', 'x-total-count')
         words = words.rows;
         response.send(words);
     }
     catch (err) {
         response.sendStatus(500);
     }
+
 }
 
-
 module.exports = {
-    getWordsFromLetter,
-    getAllWords,
+    getWords,
 }

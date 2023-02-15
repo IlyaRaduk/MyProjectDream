@@ -4,14 +4,14 @@ const instance = axios.create({
     baseURL: 'http://localhost:3005/',
 })
 
-export const getWords = async (letter) => {
+export const getWords = async (letter, page=1) => {
     if (!letter) {
-        const response = await instance.get('words/');
-        return (response.data);
+        const response = await instance.get(`words?page=${page}`);
+        return ({data:response.data, total: response.headers['x-total-count']});
     }
     letter= letter[0].toUpperCase() + letter.slice(1);
-    const response = await instance.get('words/' + letter);
-    return (response.data);
+    const response = await instance.get(`words?page=${page}&letter=${letter}`);
+    return ({data:response.data, total: Number(response.headers['x-total-count'])});
 }
 
 export const sendDream = async (dream) => {

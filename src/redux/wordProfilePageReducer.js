@@ -28,7 +28,8 @@ export const setWordProfileActionCreator = (wordProfile) => {
 
 export const getWordProfileThunkCreator = (word) => async (dispatch) => {
   try {
-    const wordProfile = await getWords(word);
+    const response = await getWords(word);
+    const wordProfile = response.data;
     dispatch(setWordProfileActionCreator(...wordProfile));
   }
   catch (error) {
